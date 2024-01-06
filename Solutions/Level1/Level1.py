@@ -55,14 +55,13 @@ nnh_tour = nearest_neighbourhood(adj_matrix, start_end_node)
 
 # Ensure the tour starts and ends at the specified node
 nnh_tour.append(start_end_node)
-
+print("hi",nnh_tour)
 # Calculate the cost of the NNH tour
 nnh_tour_cost = calculate_tour_cost(adj_matrix, nnh_tour)
 
 
 # Assuming your data is stored in a variable named 'data'
 neighbourhoods_data = data["neighbourhoods"]
-
 
 qty=[]
 # Extracting neighborhood names and order quantities
@@ -71,14 +70,14 @@ for neighbourhood, details in neighbourhoods_data.items():
     order_quantity = details["order_quantity"]
     qty.append(order_quantity)
 
+print(qty)
 
 total_capacity=data["vehicles"]["v0"]["capacity"]
-
-
-division=[]
-
+print("\n\n\n\n")
+print(nnh_tour)
 #taken from level0
 route=nnh_tour
+print(route)
 route=route[1:len(route)-1]
 paths=[]
 path=[]
