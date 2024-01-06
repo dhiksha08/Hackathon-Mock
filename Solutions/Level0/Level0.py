@@ -1,7 +1,6 @@
 import json
 import pandas as pd
 import networkx as nx
-import matplotlib.pyplot as plt
 import numpy as np
 
 with open('Student Handout\Input data\level0.json', 'r') as file:
