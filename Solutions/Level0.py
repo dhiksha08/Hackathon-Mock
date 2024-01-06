@@ -4,7 +4,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import numpy as np
 
-with open('Hackathon-Mock\Student Handout\Input data\level0.json', 'r') as file:
+with open('Student Handout\Input data\level0.json', 'r') as file:
     data = json.load(file)
 
 # Create an adjacency matrix
@@ -68,3 +68,8 @@ print(final)
 result_json = {"v0": {"path":final}}
 
 print(result_json)
+file_path = 'Solutions\output1.json'
+
+# Write the JSON structure to the file
+with open(file_path, 'w') as json_file:
+    json.dump(result_json, json_file, indent=2)
