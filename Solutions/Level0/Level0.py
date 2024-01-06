@@ -66,7 +66,7 @@ print(final)
 result_json = {"v0": {"path":final}}
 
 print(result_json)
-file_path = 'Solutions\output1.json'
+file_path = 'Solutions\level0_output.json'
 
 # Write the JSON structure to the file
 with open(file_path, 'w') as json_file:
