@@ -32,7 +32,6 @@ def travellingsalesman(c):
     adj_vertex = 999
     min_val = 999
     visited[c] = 1
-    print(c + 1, end = " ")
     path.append(c)
     for k in range(n):
         if (tsp_g[c][k] != 0 and visited[k] == 0):
@@ -43,7 +42,7 @@ def travellingsalesman(c):
         cost = cost + min_val
     if (adj_vertex == 999):
         adj_vertex = 0
-        print(adj_vertex + 1, end = " ")
+
         path.append(adj_vertex)
         cost += tsp_g[c][adj_vertex]
         return
@@ -53,9 +52,7 @@ print("Shortest Path: ", end = " ")
 travellingsalesman(0)
 print("\nMinimum Cost: ", cost)
 print(path)
-for i in range(len(path)):
-    if (i!=0 and i!=len(path)-1):
-        path[i]=path[i]-1
+path.remove(20)
 print(path)
 final=[0]*(len(path))
 for i in range(len(path)):
@@ -63,6 +60,7 @@ for i in range(len(path)):
         final[i]="n"+str(path[i])
     else:
         final[i]="r0"
+final.insert(1,"n0")
 print(final)
 
 result_json = {"v0": {"path":final}}
