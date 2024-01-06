@@ -1,5 +1,6 @@
 import json
 import numpy as np
+import pandas as pd
 
 def nearest_neighbourhood(graph, start_node):
     n = len(graph)
@@ -28,7 +29,7 @@ def calculate_tour_cost(graph, tour):
     return tour_cost
 
 # Load data from JSON
-with open('Student Handout\Input data\level0.json', 'r') as file:
+with open('Student Handout\Input data\level1a.json', 'r') as file:
     data = json.load(file)
 
 # Create an adjacency matrix
@@ -59,15 +60,52 @@ nnh_tour.append(start_end_node)
 nnh_tour_cost = calculate_tour_cost(adj_matrix, nnh_tour)
 
 
-# Convert tour to the desired output format
-output_tour = ["r0" if node == n - 1 else f"n{node}" for node in nnh_tour]
+# Assuming your data is stored in a variable named 'data'
+neighbourhoods_data = data["neighbourhoods"]
 
-# Create the result JSON structure
-result_json = {"v0": {"path": output_tour}}
 
-print(result_json)
+qty=[]
+# Extracting neighborhood names and order quantities
+for neighbourhood, details in neighbourhoods_data.items():
+    name = neighbourhood
+    order_quantity = details["order_quantity"]
+    qty.append(order_quantity)
+
+
+total_capacity=data["vehicles"]["v0"]["capacity"]
+
+
+division=[]
+
+#taken from level0
+route=nnh_tour
+route=route[1:len(route)-1]
+paths=[]
+path=[]
+cap=0
+for i in route:
+    if (cap+qty[i]<=600):
+        cap=cap+qty[i]
+    else:
+        paths.append(path)
+        path=[]
+        cap=qty[i]
+    path.append(i)
+paths.append(path)
+count=0
+dict={}
+for path in paths:
+    temp=["r0"]
+    for j in path:
+        temp.append("n"+str(j))
+    temp.append("r0")
+    count+=1
+    dict["path"+str(count)]=temp
+
+tempy={"v0":dict}
+print(tempy)
+file_path = 'Solutions\Output\level1a_output.json'
 
 # Write the JSON structure to the file
-file_path = 'Solutions\Output\level0_output.json'
 with open(file_path, 'w') as json_file:
-    json.dump(result_json, json_file, indent=2)
+    json.dump(tempy, json_file, indent=2)
